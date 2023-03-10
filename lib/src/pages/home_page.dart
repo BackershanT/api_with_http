@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               var response =
                   await BaseClient().get('/users').catchError((error) {});
+              print(response);
               if (response == null) return;
               debugPrint('successful');
               var users  =userFromJson(response);
@@ -50,22 +51,29 @@ class _HomePageState extends State<HomePage> {
             operation: 'Put',
             description: 'Edit User',
             onPressed: () async {
-              var id =476;
+              var id =4;
               var user =User(
+                // id: "4",
                 name: 'Backer',
+                  qualifications: [
+                  Qualification(
+                      completionData: "01/01/2000",degree: 'sslc'
+
+                  )
+              ]
 
               );
               var response =
               await BaseClient().put('/users/$id',user).catchError((error) {});
               if (response == null) return;
-              debugPrint('successful'+user.name.toString()+user.id.toString());
+              debugPrint('successful'+user.name.toString());
             },
           ),
           AppButton(
             operation: 'Delete',
             description: 'Delete User',
             onPressed: () async {
-              var id =479;
+              var id =4;
               var response =
               await BaseClient().delete('/users/$id').catchError((error) {});
               if (response == null) return;
